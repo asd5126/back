@@ -1,1 +1,4 @@
 pm2 start npm --name strapi_backend -- run develop
+
+yarn build
+pm2 start npm --name strapi_backend -- run start
