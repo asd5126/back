@@ -22,7 +22,7 @@
       "type": "text"
     },
     "point": {
-      "type": "integer"
+      "type": "float"
     }
   }
 }

@@ -745,7 +745,7 @@
             "type": "string"
           },
           "point": {
-            "type": "integer"
+            "type": "number"
           }
         }
       },
@@ -761,7 +761,7 @@
             "type": "string"
           },
           "point": {
-            "type": "integer"
+            "type": "number"
           },
           "created_by": {
             "type": "string"

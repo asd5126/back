@@ -35,8 +35,10 @@ module.exports = {
           `
         );
         const option = getOption[0][0];
-        const point =
-          Math.floor(Math.random() * (option.maxPoint + 1)) + option.minPoint;
+        const point = (
+          Math.random() * (option.maxPoint + 1) +
+          option.minPoint
+        ).toFixed(3);
 
         const step1 = await trx.raw(
           `
