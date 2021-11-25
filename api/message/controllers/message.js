@@ -278,8 +278,7 @@ module.exports = {
           }
         );
         if (step1[0].length === 0) {
-          ctx.send({ result: "ERROR", message: "아직 등록되지 않았습니다😅" });
-          return;
+          throw Error("아직 등록되지 않았습니다😅");
         }
 
         // Option 가져오기
@@ -333,8 +332,7 @@ module.exports = {
             }
           );
         } else {
-          ctx.send({ result: "ERROR", message: "포인트가 부족합니다😂" });
-          return;
+          throw Error("포인트가 부족합니다😂");
         }
 
         const step5 = await trx.raw(
@@ -351,6 +349,7 @@ module.exports = {
           }
         );
         ctx.send({ result: "SUCCESS", message: step5[0][0] });
+        trx.commit();
       } catch (err) {
         trx.rollback();
         ctx.send({
