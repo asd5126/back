@@ -49,6 +49,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/messages/getmypoint",
+      "handler": "message.getMyPoint",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/messages/:id",
       "handler": "message.update",

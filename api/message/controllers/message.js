@@ -216,4 +216,38 @@ module.exports = {
       });
     }
   },
+  getMyPoint: async (ctx) => {
+    try {
+      const body = ctx.request.body;
+
+      if (!body.sender || !body.imageProfileBase64) {
+        ctx.send({ result: "ERROR", message: "Validation Error" });
+        return;
+      }
+
+      const step1 = await strapi.connections.default.raw(
+        `
+        SELECT *
+        FROM kakaouids
+        WHERE
+          sender = :sender AND
+          imageProfileBase64 = :imageProfileBase64
+        `,
+        {
+          sender: body.sender,
+          imageProfileBase64: body.imageProfileBase64,
+        }
+      );
+      if (step1[0].length > 0) {
+        ctx.send({ result: "SUCCESS", message: step1[0][0] });
+      } else {
+        ctx.send({ result: "ERROR", message: "아직 등록되지 않았습니다😅" });
+      }
+    } catch (err) {
+      ctx.send({
+        result: "ERROR",
+        message: "Critical Error ![" + err.message + "]",
+      });
+    }
+  },
 };
