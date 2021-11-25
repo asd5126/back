@@ -24,96 +24,108 @@ module.exports = {
         return;
       }
 
-      // Option 가져오기
-      const getOption = await strapi.connections.default.raw(
-        `
-        SELECT *
-        FROM options
-        `
-      );
-      const option = getOption[0][0];
-      const point =
-        Math.floor(Math.random() * (option.maxPoint + 1)) + option.minPoint;
+      const trx = await strapi.connections.default.transaction();
 
-      const step1 = await strapi.connections.default.raw(
-        `
-        SELECT *
-        FROM kakaouids
-        WHERE
-          sender = :sender AND
-          imageProfileBase64 = :imageProfileBase64
-        `,
-        {
-          sender: body.sender,
-          imageProfileBase64: body.imageProfileBase64,
-        }
-      );
-
-      let kakaouid = 0;
-
-      // 유저 정보가 없는 경우
-      if (step1[0].length === 0) {
-        const step2 = await strapi.connections.default.raw(
+      try {
+        // Option 가져오기
+        const getOption = await trx.raw(
           `
-          INSERT INTO kakaouids (
-            sender, 
-            imageProfileBase64,
-            point
-          )
-          VALUES(
-            :sender, 
-            :imageProfileBase64,
-            0
-          )`,
+          SELECT *
+          FROM options
+          `
+        );
+        const option = getOption[0][0];
+        const point =
+          Math.floor(Math.random() * (option.maxPoint + 1)) + option.minPoint;
+
+        const step1 = await trx.raw(
+          `
+          SELECT *
+          FROM kakaouids
+          WHERE
+            sender = :sender AND
+            imageProfileBase64 = :imageProfileBase64
+          `,
           {
             sender: body.sender,
             imageProfileBase64: body.imageProfileBase64,
           }
         );
 
-        kakaouid = step2[0].insertId;
-        // 유저 정보가 있는 경우
-      } else {
-        kakaouid = step1[0][0].id;
-      }
+        let kakaouid = 0;
 
-      const step3 = await strapi.connections.default.raw(
-        `
-        INSERT INTO messages (
-          kakaouid, 
-          room, 
-          message,
-          point
-        )
-        VALUES(
-          :kakaouid, 
-          :room, 
-          :message,
-          :point
-        )`,
-        {
-          kakaouid: kakaouid,
-          room: body.room,
-          message: body.message,
-          point: point,
+        // 유저 정보가 없는 경우
+        if (step1[0].length === 0) {
+          const step2 = await trx.raw(
+            `
+            INSERT INTO kakaouids (
+              sender, 
+              imageProfileBase64,
+              point
+            )
+            VALUES(
+              :sender, 
+              :imageProfileBase64,
+              0
+            )`,
+            {
+              sender: body.sender,
+              imageProfileBase64: body.imageProfileBase64,
+            }
+          );
+
+          kakaouid = step2[0].insertId;
+          // 유저 정보가 있는 경우
+        } else {
+          kakaouid = step1[0][0].id;
         }
-      );
 
-      const step4 = await strapi.connections.default.raw(
-        `
-        UPDATE kakaouids 
-        SET point = IFNULL(point, 0) + :point
-        WHERE id = :kakaouid`,
-        {
-          kakaouid: kakaouid,
-          point: point,
+        const step3 = await trx.raw(
+          `
+          INSERT INTO messages (
+            kakaouid, 
+            room, 
+            message,
+            point
+          )
+          VALUES(
+            :kakaouid, 
+            :room, 
+            :message,
+            :point
+          )`,
+          {
+            kakaouid: kakaouid,
+            room: body.room,
+            message: body.message,
+            point: point,
+          }
+        );
+
+        const step4 = await trx.raw(
+          `
+          UPDATE kakaouids 
+          SET point = IFNULL(point, 0) + :point
+          WHERE id = :kakaouid`,
+          {
+            kakaouid: kakaouid,
+            point: point,
+          }
+        );
+
+        trx.commit();
+
+        if (step3[0].affectedRows === 1 && step4[0].affectedRows === 1) {
+          ctx.send({ result: "SUCCESS", message: "Successfully Inserted" });
+        } else {
+          ctx.send({ result: "ERROR", message: "DB Error" });
         }
-      );
-
-      if (step3[0].affectedRows === 1 && step4[0].affectedRows === 1) {
-        ctx.send({ result: "SUCCESS", message: "Successfully Inserted" });
-      } else {
-        ctx.send({ result: "ERROR", message: "DB Error" });
+      } catch (err) {
+        trx.rollback();
+        ctx.send({
+          result: "ERROR",
+          message: "DB Error ![" + err.message + "]",
+        });
       }
     } catch (err) {
       ctx.send({
