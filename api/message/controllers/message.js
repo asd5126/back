@@ -47,7 +47,7 @@ module.exports = {
       );
       const option = getOption[0][0];
       const point =
-        Math.floor(Math.random() * option.maxPoint) + option.minPoint;
+        Math.floor(Math.random() * (option.maxPoint + 1)) + option.minPoint;
 
       let kakaouid = 0;
 
