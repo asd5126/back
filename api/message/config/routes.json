@@ -33,6 +33,22 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/messages/kakaomsg",
+      "handler": "message.kakaoMsg",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/messages/walletenroll",
+      "handler": "message.walletEnroll",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/messages/:id",
       "handler": "message.update",
