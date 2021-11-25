@@ -102,7 +102,7 @@ module.exports = {
       const step4 = await strapi.connections.default.raw(
         `
         UPDATE kakaouids 
-        SET point = point + :point
+        SET point = IFNULL(point, 0) + :point
         WHERE id = :kakaouid`,
         {
           kakaouid: kakaouid,
