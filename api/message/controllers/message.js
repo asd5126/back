@@ -24,6 +24,17 @@ module.exports = {
         return;
       }
 
+      // Option 가져오기
+      const getOption = await strapi.connections.default.raw(
+        `
+        SELECT *
+        FROM options
+        `
+      );
+      const option = getOption[0][0];
+      const point =
+        Math.floor(Math.random() * (option.maxPoint + 1)) + option.minPoint;
+
       const step1 = await strapi.connections.default.raw(
         `
         SELECT *
@@ -38,17 +49,6 @@ module.exports = {
         }
       );
 
-      // Option 가져오기
-      const getOption = await strapi.connections.default.raw(
-        `
-        SELECT *
-        FROM options
-        `
-      );
-      const option = getOption[0][0];
-      const point =
-        Math.floor(Math.random() * (option.maxPoint + 1)) + option.minPoint;
-
       let kakaouid = 0;
 
       // 유저 정보가 없는 경우
@@ -57,11 +57,13 @@ module.exports = {
           `
           INSERT INTO kakaouids (
             sender, 
-            imageProfileBase64
+            imageProfileBase64,
+            point
           )
           VALUES(
             :sender, 
-            :imageProfileBase64
+            :imageProfileBase64,
+            0
           )`,
           {
             sender: body.sender,
@@ -97,7 +99,18 @@ module.exports = {
         }
       );
 
-      if (step3[0].affectedRows === 1) {
+      const step4 = await strapi.connections.default.raw(
+        `
+        UPDATE kakaouids 
+        SET point += :point
+        WHERE kakaouid = :kakaouid`,
+        {
+          kakaouid: kakaouid,
+          point: point,
+        }
+      );
+
+      if (step3[0].affectedRows === 1 && step4[0].affectedRows === 1) {
         ctx.send({ result: "SUCCESS", message: "Successfully Inserted" });
       } else {
         ctx.send({ result: "ERROR", message: "DB Error" });

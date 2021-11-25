@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "kakaouids",
   "info": {
-    "name": "Kakaouid"
+    "name": "Kakaouid",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -19,6 +20,9 @@
     },
     "walletKey": {
       "type": "text"
+    },
+    "point": {
+      "type": "biginteger"
     }
   }
 }
