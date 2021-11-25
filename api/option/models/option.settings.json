@@ -17,6 +17,9 @@
     },
     "maxPoint": {
       "type": "float"
+    },
+    "pointDelaySecond": {
+      "type": "integer"
     }
   }
 }

@@ -323,6 +323,9 @@
           },
           "maxPoint": {
             "type": "number"
+          },
+          "pointDelaySecond": {
+            "type": "integer"
           }
         }
       },
@@ -333,6 +336,9 @@
           },
           "maxPoint": {
             "type": "number"
+          },
+          "pointDelaySecond": {
+            "type": "integer"
           },
           "created_by": {
             "type": "string"

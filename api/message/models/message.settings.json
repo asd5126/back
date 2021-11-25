@@ -23,6 +23,9 @@
     },
     "point": {
       "type": "float"
+    },
+    "isPoint": {
+      "type": "boolean"
     }
   }
 }

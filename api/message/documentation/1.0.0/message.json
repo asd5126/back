@@ -746,6 +746,9 @@
           },
           "point": {
             "type": "number"
+          },
+          "isPoint": {
+            "type": "boolean"
           }
         }
       },
@@ -762,6 +765,9 @@
           },
           "point": {
             "type": "number"
+          },
+          "isPoint": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"

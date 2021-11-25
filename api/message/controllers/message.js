@@ -82,42 +82,72 @@ module.exports = {
           kakaouid = step1[0][0].id;
         }
 
+        const timeCheckQuery = await trx.raw(
+          `
+          SELECT TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP, a.created_at)) AS timeDiff,
+            a.created_at,
+            CURRENT_TIMESTAMP
+          FROM messages a,
+              kakaouids b
+          WHERE a.kakaouid = b.id AND
+                a.kakaouid = :kakaouid AND
+                a.isPoint = 1
+          ORDER BY a.id DESC
+          LIMIT 0, 1
+          `,
+          {
+            kakaouid: kakaouid,
+          }
+        );
+
+        let isPoint = true;
+        if (
+          timeCheckQuery[0].length > 0 &&
+          option.pointDelaySecond - timeCheckQuery[0][0].timeDiff > 0
+        )
+          isPoint = false;
+
         const step3 = await trx.raw(
           `
           INSERT INTO messages (
             kakaouid, 
             room, 
             message,
-            point
+            point,
+            isPoint
           )
           VALUES(
             :kakaouid, 
             :room, 
             :message,
-            :point
+            :point,
+            :isPoint
           )`,
           {
             kakaouid: kakaouid,
             room: body.room,
             message: body.message,
             point: point,
+            isPoint: isPoint,
           }
         );
 
-        const step4 = await trx.raw(
-          `
-          UPDATE kakaouids 
-          SET point = IFNULL(point, 0) + :point
-          WHERE id = :kakaouid`,
-          {
-            kakaouid: kakaouid,
-            point: point,
-          }
-        );
+        if (isPoint) {
+          const step4 = await trx.raw(
+            `
+            UPDATE kakaouids 
+            SET point = IFNULL(point, 0) + :point
+            WHERE id = :kakaouid`,
+            {
+              kakaouid: kakaouid,
+              point: point,
+            }
+          );
+        }
 
         trx.commit();
 
-        if (step3[0].affectedRows === 1 && step4[0].affectedRows === 1) {
+        if (step3[0].affectedRows === 1) {
           ctx.send({ result: "SUCCESS", message: "Successfully Inserted" });
         } else {
           ctx.send({ result: "ERROR", message: "DB Error" });
