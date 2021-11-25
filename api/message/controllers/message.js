@@ -293,6 +293,9 @@ module.exports = {
         const kakaouids = step1[0][0];
         const isPoint = option.selectPointCost < kakaouids.point;
 
+        console.log(option);
+        console.log(kakaouids);
+
         const step3 = await trx.raw(
           `
           INSERT INTO messages (
@@ -325,7 +328,7 @@ module.exports = {
             SET point = IFNULL(point, 0) + :point
             WHERE id = :kakaouid`,
             {
-              kakaouid: kakaouid,
+              kakaouid: kakaouids.id,
               point: -option.selectPointCost,
             }
           );
