@@ -252,12 +252,7 @@ module.exports = {
     try {
       const body = ctx.request.body;
 
-      if (
-        !body.sender ||
-        !body.imageProfileBase64 ||
-        !body.room ||
-        !body.message
-      ) {
+      if (!body.sender || !body.imageProfileBase64 || !body.room) {
         ctx.send({ result: "ERROR", message: "Validation Error" });
         return;
       }
@@ -291,9 +286,6 @@ module.exports = {
         const option = getOption[0][0];
         const kakaouids = step1[0][0];
         const isPoint = option.selectPointCost < kakaouids.point;
-
-        console.log(option);
-        console.log(kakaouids);
 
         const step3 = await trx.raw(
           `
