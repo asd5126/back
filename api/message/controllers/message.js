@@ -285,7 +285,7 @@ module.exports = {
         );
         const option = getOption[0][0];
         const kakaouids = step1[0][0];
-        const isPoint = option.selectPointCost < kakaouids.point;
+        const isPoint = option.selectPointCost <= kakaouids.point;
 
         const step3 = await trx.raw(
           `
