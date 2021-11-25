@@ -319,10 +319,10 @@
             "type": "string"
           },
           "minPoint": {
-            "type": "integer"
+            "type": "number"
           },
           "maxPoint": {
-            "type": "integer"
+            "type": "number"
           },
           "published_at": {
             "type": "string",
@@ -333,10 +333,10 @@
       "NewOption": {
         "properties": {
           "minPoint": {
-            "type": "integer"
+            "type": "number"
           },
           "maxPoint": {
-            "type": "integer"
+            "type": "number"
           },
           "published_at": {
             "type": "string",
