@@ -103,7 +103,7 @@ module.exports = {
         `
         UPDATE kakaouids 
         SET point = point + :point
-        WHERE kakaouid = :kakaouid`,
+        WHERE id = :kakaouid`,
         {
           kakaouid: kakaouid,
           point: point,
