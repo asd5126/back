@@ -672,6 +672,9 @@
           },
           "message": {
             "type": "string"
+          },
+          "point": {
+            "type": "integer"
           }
         }
       },
@@ -685,6 +688,9 @@
           },
           "message": {
             "type": "string"
+          },
+          "point": {
+            "type": "integer"
           },
           "created_by": {
             "type": "string"

@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "options",
+  "info": {
+    "name": "Option"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "minPoint": {
+      "type": "integer"
+    },
+    "maxPoint": {
+      "type": "integer"
+    }
+  }
+}

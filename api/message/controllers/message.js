@@ -38,6 +38,17 @@ module.exports = {
         }
       );
 
+      // Option 가져오기
+      const getOption = await strapi.connections.default.raw(
+        `
+        SELECT *
+        FROM options
+        `
+      );
+      const option = getOption[0][0];
+      const point =
+        Math.floor(Math.random() * option.maxPoint) + option.minPoint;
+
       let kakaouid = 0;
 
       // 유저 정보가 없는 경우
@@ -69,17 +80,20 @@ module.exports = {
         INSERT INTO messages (
           kakaouid, 
           room, 
-          message
+          message,
+          point
         )
         VALUES(
           :kakaouid, 
           :room, 
-          :message
+          :message,
+          :point
         )`,
         {
           kakaouid: kakaouid,
           room: body.room,
           message: body.message,
+          point: point,
         }
       );
 
