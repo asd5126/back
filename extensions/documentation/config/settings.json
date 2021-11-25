@@ -30,7 +30,7 @@
       "description": "Staging server"
     },
     {
-      "url": "YOUR_PRODUCTION_SERVER",
+      "url": "http://13.124.254.8:1337",
       "description": "Production server"
     }
   ],

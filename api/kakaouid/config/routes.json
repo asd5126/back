@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/kakaouids",
+      "handler": "kakaouid.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/kakaouids/count",
+      "handler": "kakaouid.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/kakaouids/:id",
+      "handler": "kakaouid.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/kakaouids",
+      "handler": "kakaouid.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/kakaouids/:id",
+      "handler": "kakaouid.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/kakaouids/:id",
+      "handler": "kakaouid.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

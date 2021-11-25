@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kakaouids",
+  "info": {
+    "name": "Kakaouid"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sender": {
+      "type": "string"
+    },
+    "imageProfileBase64": {
+      "type": "text"
+    },
+    "walletKey": {
+      "type": "text"
+    }
+  }
+}

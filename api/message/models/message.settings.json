@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "messages",
+  "info": {
+    "name": "Message"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "kakaouid": {
+      "type": "biginteger"
+    },
+    "room": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    }
+  }
+}
