@@ -36,7 +36,7 @@ module.exports = {
         );
         const option = getOption[0][0];
         const point = (
-          Math.random() * (option.maxPoint + 1) +
+          Math.random() * option.maxPoint +
           option.minPoint
         ).toFixed(3);
 
