@@ -340,8 +340,8 @@ module.exports = {
             imageProfileBase64: body.imageProfileBase64,
           }
         );
-        ctx.send({ result: "SUCCESS", message: step5[0][0] });
         trx.commit();
+        ctx.send({ result: "SUCCESS", message: step5[0][0] });
       } catch (err) {
         trx.rollback();
         ctx.send({
