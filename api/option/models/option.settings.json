@@ -20,6 +20,9 @@
     },
     "pointDelaySecond": {
       "type": "integer"
+    },
+    "selectPointCost": {
+      "type": "float"
     }
   }
 }
