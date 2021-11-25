@@ -112,3 +112,10 @@ exports
 *.cache
 build
 .strapi-updater.json
+
+############################
+# Documentation
+############################
+
+/extensions/documentation/documentation/1.0.0/full_documentation.json
+/extensions/documentation/public/index.html
