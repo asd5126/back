@@ -36,6 +36,7 @@ module.exports = async (ctx) => {
         const step2 = await trx.raw(insertKakaouids, {
           sender: body.sender,
           imageProfileBase64: body.imageProfileBase64,
+          walletKey: null,
           point: 0,
         });
 

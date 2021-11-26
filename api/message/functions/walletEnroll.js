@@ -1,4 +1,4 @@
-const { selectKakaouids, insertKakaouidsWallet, updateKakaouidsWallet } = require("../../../sql/kakaouids");
+const { selectKakaouids, updateKakaouidsWallet, insertKakaouids } = require("../../../sql/kakaouids");
 
 module.exports = async (ctx) => {
   // console.log(ctx.request.body);
@@ -23,10 +23,11 @@ module.exports = async (ctx) => {
       let step2 = [];
       // 유저 정보가 없는 경우
       if (step1[0].length === 0) {
-        step2 = await strapi.connections.default.raw(insertKakaouidsWallet, {
+        step2 = await strapi.connections.default.raw(insertKakaouids, {
           sender: body.sender,
           imageProfileBase64: body.imageProfileBase64,
           walletKey: body.walletKey,
+          point: 0,
         });
 
         // 유저 정보가 있는 경우

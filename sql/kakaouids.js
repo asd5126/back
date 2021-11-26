@@ -12,11 +12,13 @@ module.exports = {
     INSERT INTO kakaouids (
       sender, 
       imageProfileBase64,
+      walletKey,
       point
     )
     VALUES(
       :sender, 
       :imageProfileBase64,
+      :walletKey,
       :point
     )
   `,
@@ -24,18 +26,6 @@ module.exports = {
     UPDATE kakaouids 
     SET point = IFNULL(point, 0) + :point
     WHERE id = :kakaouid
-  `,
-  insertKakaouidsWallet: `/* SQL */
-    INSERT INTO kakaouids (
-      sender, 
-      imageProfileBase64,
-      walletKey
-    )
-    VALUES(
-      :sender, 
-      :imageProfileBase64,
-      :walletKey
-    )
   `,
   updateKakaouidsWallet: `/* SQL */
     UPDATE 
