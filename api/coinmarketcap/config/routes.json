@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/coinmarketcaps",
+      "handler": "coinmarketcap.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/coinmarketcaps/count",
+      "handler": "coinmarketcap.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/coinmarketcaps/:id",
+      "handler": "coinmarketcap.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/coinmarketcaps",
+      "handler": "coinmarketcap.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/coinmarketcaps/:id",
+      "handler": "coinmarketcap.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/coinmarketcaps/:id",
+      "handler": "coinmarketcap.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -5,16 +5,6 @@ const { selectBossCheck } = require("../../../sql/rooms");
 const setPoint = require("./setPoint");
 
 module.exports = async (trx, body) => {
-  const getBossCheck = await trx.raw(selectBossCheck, {
-    room: body.room,
-    sender: body.sender,
-    imageProfileBase64: body.imageProfileBase64,
-  });
-
-  if (getBossCheck[0].length === 0) {
-    throw Error("ERROR|당신은 방장이 아닙니다😅 방장만 사용가능합니다!");
-  }
-
   const commandSplit = body.message.substr(1, body.message.length).split(" ");
   const minusPoint = commandSplit[commandSplit.length - 1];
   let sender = "";
@@ -29,6 +19,16 @@ module.exports = async (trx, body) => {
     throw Error(`ERROR|[차감실패!😥]\n차감포인트는 실수형으로 적어주세요!!`);
   } else if (minusPoint.split(".")[1] && minusPoint.split(".")[1].length > 3) {
     throw Error(`ERROR|[차감실패!😥]\n차감포인트는 최대 소수점 3자리까지만 가능합니다!!`);
+  }
+
+  const getBossCheck = await trx.raw(selectBossCheck, {
+    room: body.room,
+    sender: body.sender,
+    imageProfileBase64: body.imageProfileBase64,
+  });
+
+  if (getBossCheck[0].length === 0) {
+    throw Error("ERROR|당신은 방장이 아닙니다😅 방장만 사용가능합니다!");
   }
 
   const getSender = await trx.raw(selectKakaouidsOnlySender, {

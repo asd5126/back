@@ -2,6 +2,7 @@
 
 const { COMMAND_PREFIX } = require("../../../config");
 const getBoss = require("../functions/getBoss");
+const getCoin = require("../functions/getCoin");
 const getCommand = require("../functions/getCommand");
 const getMyPoint = require("../functions/getMyPoint");
 const kakaoMsg = require("../functions/kakaoMsg");
@@ -41,6 +42,9 @@ module.exports = {
               break;
             case "차감":
               resultObject = await setPeoplePoint(trx, body);
+              break;
+            case "코인":
+              resultObject = await getCoin(trx, body);
               break;
           }
         } else {

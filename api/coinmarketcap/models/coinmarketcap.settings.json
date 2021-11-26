@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coinmarketcaps",
+  "info": {
+    "name": "Coinmarketcap",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "coinId": {
+      "type": "integer",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

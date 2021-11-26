@@ -23,6 +23,15 @@
     },
     "selectPointCost": {
       "type": "float"
+    },
+    "selectCoinmarketcapCost": {
+      "type": "float"
+    },
+    "coinmarketcapUrl": {
+      "type": "text"
+    },
+    "coinmarketcapKrwId": {
+      "type": "integer"
     }
   }
 }

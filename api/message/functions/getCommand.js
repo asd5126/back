@@ -17,6 +17,7 @@ ${COMMAND_PREFIX}지갑등록 지갑주소
 ${COMMAND_PREFIX}포인트조회
 ${COMMAND_PREFIX}방장조회
 ${COMMAND_PREFIX}차감 유저이름 포인트 (방장전용)
+${COMMAND_PREFIX}코인 코인이름
 `.trim(),
   };
 };

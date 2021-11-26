@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/option": {
+    "/coinmarketcaps": {
       "get": {
         "deprecated": false,
-        "description": "Find all the option's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve option document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Option"
+                    "$ref": "#/components/schemas/Coinmarketcap"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Option"
+          "Coinmarketcap"
         ],
         "parameters": [
           {
@@ -192,16 +192,16 @@
           }
         ]
       },
-      "put": {
+      "post": {
         "deprecated": false,
-        "description": "Update a single option record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve option document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Option"
+                  "$ref": "#/components/schemas/Coinmarketcap"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Option"
+          "Coinmarketcap"
         ],
         "requestBody": {
           "description": "",
@@ -247,19 +247,212 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewOption"
+                "$ref": "#/components/schemas/NewCoinmarketcap"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coinmarketcaps/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
               }
             }
           }
         },
+        "summary": "",
+        "tags": [
+          "Coinmarketcap"
+        ],
         "parameters": []
+      }
+    },
+    "/coinmarketcaps/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Coinmarketcap"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Coinmarketcap"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Coinmarketcap"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Coinmarketcap"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCoinmarketcap"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single option record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single option based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -302,67 +495,54 @@
         },
         "summary": "",
         "tags": [
-          "Option"
+          "Coinmarketcap"
         ],
-        "parameters": []
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "Option": {
+      "Coinmarketcap": {
         "required": [
-          "id"
+          "id",
+          "coinId",
+          "name"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "minPoint": {
-            "type": "number"
-          },
-          "maxPoint": {
-            "type": "number"
-          },
-          "pointDelaySecond": {
+          "coinId": {
             "type": "integer"
           },
-          "selectPointCost": {
-            "type": "number"
-          },
-          "selectCoinmarketcapCost": {
-            "type": "number"
-          },
-          "coinmarketcapUrl": {
+          "name": {
             "type": "string"
-          },
-          "coinmarketcapKrwId": {
-            "type": "integer"
           }
         }
       },
-      "NewOption": {
+      "NewCoinmarketcap": {
+        "required": [
+          "coinId",
+          "name"
+        ],
         "properties": {
-          "minPoint": {
-            "type": "number"
-          },
-          "maxPoint": {
-            "type": "number"
-          },
-          "pointDelaySecond": {
+          "coinId": {
             "type": "integer"
           },
-          "selectPointCost": {
-            "type": "number"
-          },
-          "selectCoinmarketcapCost": {
-            "type": "number"
-          },
-          "coinmarketcapUrl": {
+          "name": {
             "type": "string"
-          },
-          "coinmarketcapKrwId": {
-            "type": "integer"
           },
           "created_by": {
             "type": "string"
@@ -376,7 +556,7 @@
   },
   "tags": [
     {
-      "name": "Option"
+      "name": "Coinmarketcap"
     }
   ]
 }
