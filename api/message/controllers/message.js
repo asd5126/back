@@ -53,7 +53,7 @@ module.exports = {
         if (err.message.split("|")[0] === "NO_REPLY") {
           ctx.send({ result: "NO_REPLY", message: err.message.split("|")[1] });
         } else if (err.message.split("|")[0] === "ERROR") {
-          ctx.send({ result: "ERROR", message: err.message });
+          ctx.send({ result: "ERROR", message: err.message.split("|")[1] });
         } else {
           ctx.send({ result: "NO_REPLY", message: err.message });
         }
