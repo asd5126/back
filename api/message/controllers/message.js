@@ -52,12 +52,14 @@ module.exports = {
         trx.rollback();
         if (err.message.split("|")[0] === "NO_REPLY") {
           ctx.send({ result: "NO_REPLY", message: err.message.split("|")[1] });
-        } else {
+        } else if (err.message.split("|")[0] === "ERROR") {
           ctx.send({ result: "ERROR", message: err.message });
+        } else {
+          ctx.send({ result: "NO_REPLY", message: err.message });
         }
       }
     } catch (err) {
-      ctx.send({ result: "ERROR", message: "치명적인 에러 ![" + err.message + "]" });
+      ctx.send({ result: "NO_REPLY", message: "치명적인 에러 ![" + err.message + "]" });
     }
   },
 };
