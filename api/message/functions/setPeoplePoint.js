@@ -1,5 +1,5 @@
 const { COMMAND_PREFIX } = require("../../../config");
-const { selectKakaouidsOnlySender } = require("../../../sql/kakaouids");
+const { selectKakaouidsOnlySender, selectKakaouids } = require("../../../sql/kakaouids");
 const { selectBossCheck } = require("../../../sql/rooms");
 const setPoint = require("./setPoint");
 
@@ -50,9 +50,15 @@ module.exports = async (trx, body) => {
     isPoint: true,
   });
 
+  const getKakaouids = await trx.raw(selectKakaouids, {
+    room: body.room,
+    sender: getSender[0][0].sender,
+    imageProfileBase64: getSender[0][0].imageProfileBase64,
+  });
+
   return {
     result: "SUCCESS",
     message: `[${minusPoint} 포인트차감!!]
-[${getSender[0][0].sender}님의 포인트 : ${getSender[0][0].point.toFixed(3)}]`.trim(),
+[${getKakaouids[0][0].sender}님의 포인트 : ${getKakaouids[0][0].point.toFixed(3)}]`.trim(),
   };
 };
