@@ -5,6 +5,7 @@ module.exports = async (trx, body) => {
   await trx.raw(insertMessages, {
     kakaouid: body.kakaouid,
     room: body.room,
+    sender: body.sender,
     message: body.message,
     point: body.point,
     isPoint: body.isPoint,

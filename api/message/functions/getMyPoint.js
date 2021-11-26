@@ -4,6 +4,7 @@ const setPoint = require("./setPoint");
 
 module.exports = async (trx, body) => {
   const getKakaouids = await trx.raw(selectKakaouids, {
+    room: body.room,
     sender: body.sender,
     imageProfileBase64: body.imageProfileBase64,
   });
@@ -21,6 +22,7 @@ module.exports = async (trx, body) => {
   await setPoint(trx, {
     kakaouid: kakaouids.id,
     room: body.room,
+    sender: body.sender,
     message: "[포인트조회]",
     point: -option.selectPointCost,
     isPoint,
@@ -31,6 +33,7 @@ module.exports = async (trx, body) => {
   }
 
   const step5 = await trx.raw(selectKakaouids, {
+    room: body.room,
     sender: body.sender,
     imageProfileBase64: body.imageProfileBase64,
   });

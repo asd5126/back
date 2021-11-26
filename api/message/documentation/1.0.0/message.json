@@ -607,6 +607,9 @@
           },
           "isPoint": {
             "type": "boolean"
+          },
+          "sender": {
+            "type": "string"
           }
         }
       },
@@ -626,6 +629,9 @@
           },
           "isPoint": {
             "type": "boolean"
+          },
+          "sender": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

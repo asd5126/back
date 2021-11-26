@@ -13,6 +13,7 @@ module.exports = {
     INSERT INTO messages (
       kakaouid, 
       room, 
+      sender,
       message,
       point,
       isPoint
@@ -20,6 +21,7 @@ module.exports = {
     VALUES(
       :kakaouid, 
       :room, 
+      :sender, 
       :message,
       :point,
       :isPoint

@@ -5,6 +5,7 @@ const setPoint = require("./setPoint");
 
 module.exports = async (trx, body) => {
   const getKakaouids = await trx.raw(selectKakaouids, {
+    room: body.room,
     sender: body.sender,
     imageProfileBase64: body.imageProfileBase64,
   });
@@ -13,6 +14,7 @@ module.exports = async (trx, body) => {
   // 유저 정보가 없는 경우
   if (getKakaouids[0].length === 0) {
     const postKakaouids = await trx.raw(insertKakaouids, {
+      room: body.room,
       sender: body.sender,
       imageProfileBase64: body.imageProfileBase64,
       walletKey: null,
@@ -36,6 +38,7 @@ module.exports = async (trx, body) => {
   await setPoint(trx, {
     kakaouid,
     room: body.room,
+    sender: body.sender,
     message: body.message,
     point,
     isPoint,

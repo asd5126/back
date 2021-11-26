@@ -7,6 +7,7 @@ module.exports = async (trx, body) => {
     throw Error(`[지갑등록실패!😥]\n${COMMAND_PREFIX}지갑등록 [지갑주소] <- 이렇게 입력해주세요!!`);
   }
   const step1 = await trx.raw(selectKakaouids, {
+    room: body.room,
     sender: body.sender,
     imageProfileBase64: body.imageProfileBase64,
   });
@@ -14,6 +15,7 @@ module.exports = async (trx, body) => {
   // 유저 정보가 없는 경우
   if (step1[0].length === 0) {
     await trx.raw(insertKakaouids, {
+      room: body.room,
       sender: body.sender,
       imageProfileBase64: body.imageProfileBase64,
       walletKey,

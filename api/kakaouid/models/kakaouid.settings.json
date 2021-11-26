@@ -12,6 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "room": {
+      "type": "string"
+    },
     "sender": {
       "type": "string"
     },

@@ -5,17 +5,20 @@ module.exports = {
     FROM 
       kakaouids
     WHERE
+      room = :room AND
       sender = :sender AND
       imageProfileBase64 = :imageProfileBase64
   `,
   insertKakaouids: `/* SQL */
     INSERT INTO kakaouids (
+      room,
       sender, 
       imageProfileBase64,
       walletKey,
       point
     )
     VALUES(
+      :room, 
       :sender, 
       :imageProfileBase64,
       :walletKey,
