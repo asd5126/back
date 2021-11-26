@@ -26,6 +26,8 @@ module.exports = async (trx, body) => {
     throw Error(`ERROR|[차감실패!😥]\n${COMMAND_PREFIX}차감 유저이름 차감포인트 <- 이렇게 입력해주세요!!`);
   } else if (isNaN(minusPoint)) {
     throw Error(`ERROR|[차감실패!😥]\n차감포인트는 실수형으로 적어주세요!!`);
+  } else if (minusPoint.split(".")[1] && minusPoint.split(".")[1].length > 3) {
+    throw Error(`ERROR|[차감실패!😥]\n차감포인트는 최대 소수점 3자리까지만 가능합니다!!`);
   }
 
   const getSender = await trx.raw(selectKakaouidsOnlySender, {
