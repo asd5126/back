@@ -1,3 +1,4 @@
+const numeral = require("numeral");
 const { selectKakaouids, insertKakaouids } = require("../../../sql/kakaouids");
 const { selectTimeCheckQuery } = require("../../../sql/messages");
 const { selectOptions } = require("../../../sql/options");
@@ -31,7 +32,7 @@ module.exports = async (trx, body) => {
   let isPoint = true;
   const getOptions = await trx.raw(selectOptions);
   const option = getOptions[0][0];
-  const point = (Math.random() * option.maxPoint + option.minPoint).toFixed(3);
+  const point = numeral(Math.random() * option.maxPoint + option.minPoint).format("0.000");
   const timeCheckQuery = await trx.raw(selectTimeCheckQuery, { kakaouid });
   if (timeCheckQuery[0].length > 0 && option.pointDelaySecond - timeCheckQuery[0][0].timeDiff > 0) isPoint = false;
 

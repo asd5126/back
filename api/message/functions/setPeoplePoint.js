@@ -1,3 +1,4 @@
+const numeral = require("numeral");
 const { COMMAND_PREFIX } = require("../../../config");
 const { selectKakaouidsOnlySender, selectKakaouids } = require("../../../sql/kakaouids");
 const { selectBossCheck } = require("../../../sql/rooms");
@@ -40,7 +41,7 @@ module.exports = async (trx, body) => {
   } else if (getSender[0].length > 1) {
     throw Error(`ERROR|[차감실패!😥]\n${sender}라는 유저가 ${getSender[0].length} 명 존재합니다!!😂 이름을 바꿔주세요`);
   } else if (getSender[0][0].point < minusPoint) {
-    throw Error(`ERROR|[차감실패!😥]\n${sender}라는 유저는 ${getSender[0][0].point.toFixed(3)} 포인트 밖에 없습니다 😂`);
+    throw Error(`ERROR|[차감실패!😥]\n${sender}라는 유저는 ${numeral(getSender[0][0].point).format("0,0.000")} 포인트 밖에 없습니다 😂`);
   }
 
   await setPoint(trx, {
@@ -61,6 +62,6 @@ module.exports = async (trx, body) => {
   return {
     result: "SUCCESS",
     message: `[${minusPoint} 포인트차감!!]
-[${getKakaouids[0][0].sender}님의 포인트 : ${getKakaouids[0][0].point.toFixed(3)}]`.trim(),
+[${getKakaouids[0][0].sender}님의 포인트 : ${numeral(getKakaouids[0][0].point).format("0,0.000")}]`.trim(),
   };
 };

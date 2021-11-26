@@ -13,6 +13,7 @@
   "dependencies": {
     "knex": "0.21.18",
     "mysql": "2.18.1",
+    "numeral": "^2.0.6",
     "sql-template-strings": "^2.2.2",
     "strapi": "3.6.8",
     "strapi-admin": "3.6.8",
