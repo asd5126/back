@@ -35,5 +35,5 @@ module.exports = async (trx, body) => {
     imageProfileBase64: body.imageProfileBase64,
   });
 
-  return { result: "SUCCESS", message: `[${step5[0][0].sender}님의 포인트 : ${step5[0][0].point}]` };
+  return { result: "SUCCESS", message: `[${step5[0][0].sender}님의 포인트 : ${step5[0][0].point.toFixed(3)}]` };
 };
