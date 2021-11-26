@@ -34,11 +34,11 @@ module.exports = async (trx, body) => {
   });
 
   if (getSender[0].length === 0) {
-    throw Error(`ERROR|[${sender}라는 유저는 존재하지 않습니다!!😂`);
+    throw Error(`ERROR|[차감실패!😥]\n${sender}라는 유저는 존재하지 않습니다!!😂`);
   } else if (getSender[0].length > 1) {
-    throw Error(`ERROR|[${sender}라는 유저가 ${getSender[0].length} 명 존재합니다!!😂 이름을 바꿔주세요`);
+    throw Error(`ERROR|[차감실패!😥]\n${sender}라는 유저가 ${getSender[0].length} 명 존재합니다!!😂 이름을 바꿔주세요`);
   } else if (getSender[0][0].point < minusPoint) {
-    throw Error(`ERROR|[${sender}라는 유저는 ${getSender[0][0].point.toFixed(3)} 포인트 밖에 없습니다 😂`);
+    throw Error(`ERROR|[차감실패!😥]\n${sender}라는 유저는 ${getSender[0][0].point.toFixed(3)} 포인트 밖에 없습니다 😂`);
   }
 
   await setPoint(trx, {
