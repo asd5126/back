@@ -57,6 +57,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/messages/testmessage",
+      "handler": "message.testMessage",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/messages/:id",
       "handler": "message.update",
