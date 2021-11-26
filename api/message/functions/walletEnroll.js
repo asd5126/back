@@ -1,9 +1,10 @@
 const { selectKakaouids, updateKakaouidsWallet, insertKakaouids } = require("../../../sql/kakaouids");
+const { COMMAND_PREFIX } = require("../config");
 
 module.exports = async (trx, body) => {
   const walletKey = body.message.split(" ")[1];
   if (!walletKey) {
-    throw Error("[지갑등록실패!😥]\n!지갑등록 [지갑주소] <- 이렇게 입력해주세요!!");
+    throw Error(`[지갑등록실패!😥]\n${COMMAND_PREFIX}지갑등록 [지갑주소] <- 이렇게 입력해주세요!!`);
   }
   const step1 = await trx.raw(selectKakaouids, {
     sender: body.sender,
