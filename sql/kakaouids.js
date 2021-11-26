@@ -9,6 +9,15 @@ module.exports = {
       sender = :sender AND
       imageProfileBase64 = :imageProfileBase64
   `,
+  selectKakaouidsOnlySender: `/* SQL */
+    SELECT 
+      *
+    FROM 
+      kakaouids
+    WHERE
+      room = :room AND
+      sender = :sender
+  `,
   insertKakaouids: `/* SQL */
     INSERT INTO kakaouids (
       room,

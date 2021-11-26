@@ -2,20 +2,23 @@
   "kind": "collectionType",
   "collectionName": "rooms",
   "info": {
-    "name": "Room"
+    "name": "Room",
+    "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "room": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "bossuid": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     }
   }
 }

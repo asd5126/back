@@ -1,9 +1,11 @@
 "use strict";
 
 const { COMMAND_PREFIX } = require("../../../config");
+const getBoss = require("../functions/getBoss");
 const getCommand = require("../functions/getCommand");
 const getMyPoint = require("../functions/getMyPoint");
 const kakaoMsg = require("../functions/kakaoMsg");
+const setPeoplePoint = require("../functions/setPeoplePoint");
 const walletEnroll = require("../functions/walletEnroll");
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -33,6 +35,12 @@ module.exports = {
               break;
             case "포인트조회":
               resultObject = await getMyPoint(trx, body);
+              break;
+            case "방장조회":
+              resultObject = await getBoss(trx, body);
+              break;
+            case "차감":
+              resultObject = await setPeoplePoint(trx, body);
               break;
           }
         } else {

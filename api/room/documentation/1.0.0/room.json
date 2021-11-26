@@ -516,7 +516,9 @@
     "schemas": {
       "Room": {
         "required": [
-          "id"
+          "id",
+          "room",
+          "bossuid"
         ],
         "properties": {
           "id": {
@@ -527,24 +529,20 @@
           },
           "bossuid": {
             "type": "integer"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
       "NewRoom": {
+        "required": [
+          "room",
+          "bossuid"
+        ],
         "properties": {
           "room": {
             "type": "string"
           },
           "bossuid": {
             "type": "integer"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           },
           "created_by": {
             "type": "string"
