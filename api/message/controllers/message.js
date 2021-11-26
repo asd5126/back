@@ -2,8 +2,8 @@
 
 const getMyPoint = require("../functions/getMyPoint");
 const kakaoMsg = require("../functions/kakaoMsg");
-const testMessage = require("../functions/testMessage");
 const walletEnroll = require("../functions/walletEnroll");
+const COMMAND_PREFIX = "!";
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -11,8 +11,44 @@ const walletEnroll = require("../functions/walletEnroll");
  */
 
 module.exports = {
-  kakaoMsg,
-  walletEnroll,
-  getMyPoint,
-  testMessage,
+  kakaoBot: async (ctx) => {
+    try {
+      const body = ctx.request.body;
+
+      if (!body.sender || !body.imageProfileBase64 || !body.message || !body.room || !body.isDebugRoom || !body.isGroupChat) {
+        ctx.send({ result: "ERROR", message: "유효성 검사 에러" });
+        return;
+      }
+
+      const trx = await strapi.connections.default.transaction();
+      try {
+        let resultObject = { result: "NO_REPLY", message: "메시지 없음" };
+        if (body.message[0] === COMMAND_PREFIX) {
+          switch (body.message.substr(1, body.message.length).split(" ")[0]) {
+            case "명령어":
+              break;
+            case "지갑등록":
+              resultObject = await walletEnroll(trx, body);
+              break;
+            case "포인트조회":
+              resultObject = await getMyPoint(trx, body);
+              break;
+          }
+        } else {
+          resultObject = await kakaoMsg(trx, body);
+        }
+        trx.commit();
+        ctx.send(resultObject);
+      } catch (err) {
+        trx.rollback();
+        if (err.message.split("|")[0] === "NO_REPLY") {
+          ctx.send({ result: "NO_REPLY", message: err.message.split("|")[1] });
+        } else {
+          ctx.send({ result: "ERROR", message: err.message });
+        }
+      }
+    } catch (err) {
+      ctx.send({ result: "ERROR", message: "치명적인 에러 ![" + err.message + "]" });
+    }
+  },
 };

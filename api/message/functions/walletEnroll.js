@@ -1,61 +1,32 @@
 const { selectKakaouids, updateKakaouidsWallet, insertKakaouids } = require("../../../sql/kakaouids");
 
-module.exports = async (ctx) => {
-  // console.log(ctx.request.body);
-  // console.log(ctx.params);
-  // console.log(ctx.query);
+module.exports = async (trx, body) => {
+  const walletKey = body.message.split(" ")[1];
+  if (!walletKey) {
+    throw Error("[지갑등록실패!😥]\n!지갑등록 [지갑주소] <- 이렇게 입력해주세요!!");
+  }
+  const step1 = await trx.raw(selectKakaouids, {
+    sender: body.sender,
+    imageProfileBase64: body.imageProfileBase64,
+  });
 
-  try {
-    const body = ctx.request.body;
+  // 유저 정보가 없는 경우
+  if (step1[0].length === 0) {
+    await trx.raw(insertKakaouids, {
+      sender: body.sender,
+      imageProfileBase64: body.imageProfileBase64,
+      walletKey,
+      point: 0,
+    });
 
-    if (!body.sender || !body.imageProfileBase64 || !body.walletKey) {
-      ctx.send({ result: "ERROR", message: "Validation Error" });
-      return;
-    }
-
-    const trx = await strapi.connections.default.transaction();
-    try {
-      const step1 = await strapi.connections.default.raw(selectKakaouids, {
-        sender: body.sender,
-        imageProfileBase64: body.imageProfileBase64,
-      });
-
-      let step2 = [];
-      // 유저 정보가 없는 경우
-      if (step1[0].length === 0) {
-        step2 = await strapi.connections.default.raw(insertKakaouids, {
-          sender: body.sender,
-          imageProfileBase64: body.imageProfileBase64,
-          walletKey: body.walletKey,
-          point: 0,
-        });
-
-        // 유저 정보가 있는 경우
-      } else {
-        step2 = await strapi.connections.default.raw(updateKakaouidsWallet, {
-          sender: body.sender,
-          imageProfileBase64: body.imageProfileBase64,
-          walletKey: body.walletKey,
-        });
-      }
-
-      trx.commit();
-      if (step2[0].affectedRows === 1) {
-        ctx.send({ result: "SUCCESS", message: "Successfully Inserted" });
-      } else {
-        ctx.send({ result: "ERROR", message: "DB Error" });
-      }
-    } catch (err) {
-      trx.rollback();
-      ctx.send({
-        result: "ERROR",
-        message: "DB Error ![" + err.message + "]",
-      });
-    }
-  } catch (err) {
-    ctx.send({
-      result: "ERROR",
-      message: "Critical Error ![" + err.message + "]",
+    // 유저 정보가 있는 경우
+  } else {
+    await trx.raw(updateKakaouidsWallet, {
+      sender: body.sender,
+      imageProfileBase64: body.imageProfileBase64,
+      walletKey,
     });
   }
+
+  return { result: "SUCCESS", message: "[지갑등록완료!😀]\n등록된 지갑 주소 : " + walletKey };
 };

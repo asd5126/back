@@ -34,32 +34,8 @@
     },
     {
       "method": "POST",
-      "path": "/messages/kakaomsg",
-      "handler": "message.kakaoMsg",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/messages/walletenroll",
-      "handler": "message.walletEnroll",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/messages/getmypoint",
-      "handler": "message.getMyPoint",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/messages/testmessage",
-      "handler": "message.testMessage",
+      "path": "/messages/kakaobot",
+      "handler": "message.kakaoBot",
       "config": {
         "policies": []
       }
