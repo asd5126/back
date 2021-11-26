@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rooms",
+  "info": {
+    "name": "Room"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "room": {
+      "type": "string"
+    },
+    "bossuid": {
+      "type": "integer"
+    }
+  }
+}

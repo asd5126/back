@@ -1,5 +1,5 @@
+const { COMMAND_PREFIX } = require("../../../config");
 const { selectKakaouids, updateKakaouidsWallet, insertKakaouids } = require("../../../sql/kakaouids");
-const { COMMAND_PREFIX } = require("../config");
 
 module.exports = async (trx, body) => {
   const walletKey = body.message.split(" ")[1];

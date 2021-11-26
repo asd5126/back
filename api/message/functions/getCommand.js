@@ -1,4 +1,4 @@
-const { COMMAND_PREFIX } = require("../config");
+const { COMMAND_PREFIX } = require("../../../config");
 
 module.exports = async (trx, body) => {
   return {

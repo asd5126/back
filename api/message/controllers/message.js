@@ -1,11 +1,10 @@
 "use strict";
 
-const { COMMAND_PREFIX } = require("../config");
+const { COMMAND_PREFIX } = require("../../../config");
 const getCommand = require("../functions/getCommand");
 const getMyPoint = require("../functions/getMyPoint");
 const kakaoMsg = require("../functions/kakaoMsg");
 const walletEnroll = require("../functions/walletEnroll");
-
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
