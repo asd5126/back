@@ -1,4 +1,5 @@
 const { COMMAND_PREFIX } = require("../../../config");
+const { selectOptions } = require("../../../sql/options");
 
 module.exports = async (trx, body) => {
   // Option 가져오기
