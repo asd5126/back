@@ -46,6 +46,9 @@ module.exports = {
             case "코인":
               resultObject = await getCoin(trx, body);
               break;
+            default:
+              resultObject = await getCoin(trx, body);
+              break;
           }
         } else {
           resultObject = await kakaoMsg(trx, body);

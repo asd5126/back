@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commands",
+  "info": {
+    "name": "Command"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "command": {
+      "type": "string"
+    },
+    "message": {
+      "type": "text"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
