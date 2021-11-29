@@ -45,7 +45,17 @@ module.exports = {
     SET 
       walletKey = :walletKey
     WHERE
+      room = :room AND
       sender = :sender AND
       imageProfileBase64 = :imageProfileBase64
+  `,
+  updateKakaouidsWalletOnlySender: `/* SQL */
+    UPDATE 
+      kakaouids
+    SET 
+      walletKey = :walletKey
+    WHERE
+      room = :room AND
+      sender = :sender
   `,
 };

@@ -25,6 +25,7 @@ module.exports = async (trx, body) => {
     // 유저 정보가 있는 경우
   } else {
     await trx.raw(updateKakaouidsWallet, {
+      room: body.room,
       sender: body.sender,
       imageProfileBase64: body.imageProfileBase64,
       walletKey,

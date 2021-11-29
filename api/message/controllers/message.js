@@ -7,6 +7,8 @@ const getCommand = require("../functions/getCommand");
 const getMyPoint = require("../functions/getMyPoint");
 const kakaoMsg = require("../functions/kakaoMsg");
 const setPeoplePoint = require("../functions/setPeoplePoint");
+const walletCancel = require("../functions/walletCancel");
+const walletCancelForce = require("../functions/walletCancelForce");
 const walletEnroll = require("../functions/walletEnroll");
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -30,6 +32,12 @@ module.exports = {
           switch (body.message.substr(1, body.message.length).split(" ")[0]) {
             case "지갑등록":
               resultObject = await walletEnroll(trx, body);
+              break;
+            case "지갑해제":
+              resultObject = await walletCancel(trx, body);
+              break;
+            case "강제지갑해제":
+              resultObject = await walletCancelForce(trx, body);
               break;
             case "포인트조회":
               resultObject = await getMyPoint(trx, body);
