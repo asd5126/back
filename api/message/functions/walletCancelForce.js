@@ -12,7 +12,6 @@ module.exports = async (trx, body) => {
   });
   sender = sender.trim();
 
-  console.log(sender);
   if (!sender) {
     throw Error(`ERROR|[해제실패!😥]\n${COMMAND_PREFIX}강제지갑해제 유저이름 <- 이렇게 입력해주세요!!`);
   }
