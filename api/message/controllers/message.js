@@ -28,9 +28,6 @@ module.exports = {
         let resultObject = { result: "NO_REPLY", message: "메시지 없음" };
         if (body.message[0] === COMMAND_PREFIX) {
           switch (body.message.substr(1, body.message.length).split(" ")[0]) {
-            case "명령어":
-              resultObject = await getCommand(trx, body);
-              break;
             case "지갑등록":
               resultObject = await walletEnroll(trx, body);
               break;
@@ -47,7 +44,7 @@ module.exports = {
               resultObject = await getCoin(trx, body);
               break;
             default:
-              resultObject = await getCoin(trx, body);
+              resultObject = await getCommand(trx, body);
               break;
           }
         } else {

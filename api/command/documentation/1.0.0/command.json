@@ -516,7 +516,10 @@
     "schemas": {
       "Command": {
         "required": [
-          "id"
+          "id",
+          "command",
+          "message",
+          "isActive"
         ],
         "properties": {
           "id": {
@@ -535,6 +538,11 @@
         }
       },
       "NewCommand": {
+        "required": [
+          "command",
+          "message",
+          "isActive"
+        ],
         "properties": {
           "command": {
             "type": "string"

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "commands",
   "info": {
-    "name": "Command"
+    "name": "Command",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -12,14 +13,17 @@
   "pluginOptions": {},
   "attributes": {
     "command": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "message": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "isActive": {
       "type": "boolean",
-      "default": true
+      "default": true,
+      "required": true
     }
   }
 }
