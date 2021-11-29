@@ -50,7 +50,9 @@
           }
         },
         "summary": "",
-        "tags": ["Kakaouid"],
+        "tags": [
+          "Kakaouid"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -236,7 +238,9 @@
           }
         },
         "summary": "",
-        "tags": ["Kakaouid"],
+        "tags": [
+          "Kakaouid"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -301,7 +305,9 @@
           }
         },
         "summary": "",
-        "tags": ["Kakaouid"],
+        "tags": [
+          "Kakaouid"
+        ],
         "parameters": []
       }
     },
@@ -352,7 +358,9 @@
           }
         },
         "summary": "",
-        "tags": ["Kakaouid"],
+        "tags": [
+          "Kakaouid"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -412,7 +420,9 @@
           }
         },
         "summary": "",
-        "tags": ["Kakaouid"],
+        "tags": [
+          "Kakaouid"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -484,7 +494,9 @@
           }
         },
         "summary": "",
-        "tags": ["Kakaouid"],
+        "tags": [
+          "Kakaouid"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -503,7 +515,9 @@
   "components": {
     "schemas": {
       "Kakaouid": {
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -522,11 +536,18 @@
           },
           "point": {
             "type": "number"
+          },
+          "isMembership": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
       "NewKakaouid": {
         "properties": {
+          "room": {
+            "type": "string"
+          },
           "sender": {
             "type": "string"
           },
@@ -539,8 +560,9 @@
           "point": {
             "type": "number"
           },
-          "room": {
-            "type": "string"
+          "isMembership": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"

@@ -26,6 +26,10 @@
     },
     "point": {
       "type": "float"
+    },
+    "isMembership": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
