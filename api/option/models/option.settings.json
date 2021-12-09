@@ -32,6 +32,9 @@
     },
     "coinmarketcapKrwId": {
       "type": "integer"
+    },
+    "isPointOnlyWallet": {
+      "type": "boolean"
     }
   }
 }

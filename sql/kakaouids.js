@@ -58,4 +58,14 @@ module.exports = {
       room = :room AND
       sender = :sender
   `,
+  updateKakaouidsApply: `/* SQL */
+    UPDATE 
+      kakaouids
+    SET 
+      isApply = :isApply
+    WHERE
+      room = :room AND
+      sender = :sender AND
+      imageProfileBase64 = :imageProfileBase64
+  `,
 };

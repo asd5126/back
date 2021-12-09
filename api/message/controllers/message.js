@@ -4,8 +4,10 @@ const { COMMAND_PREFIX } = require("../../../config");
 const getBoss = require("../functions/getBoss");
 const getCoin = require("../functions/getCoin");
 const getCommand = require("../functions/getCommand");
+const getDomi = require("../functions/getDomi");
 const getMyPoint = require("../functions/getMyPoint");
 const kakaoMsg = require("../functions/kakaoMsg");
+const setApply = require("../functions/setApply");
 const setPeoplePoint = require("../functions/setPeoplePoint");
 const walletCancel = require("../functions/walletCancel");
 const walletCancelForce = require("../functions/walletCancelForce");
@@ -50,6 +52,14 @@ module.exports = {
               break;
             case "코인":
               resultObject = await getCoin(trx, body);
+              break;
+            case "도미":
+            case "도미넌스":
+              resultObject = await getDomi(trx, body);
+              break;
+            case "신청합니다.":
+            case "신청취소합니다.":
+              resultObject = await setApply(trx, body);
               break;
             default:
               resultObject = await getCommand(trx, body);

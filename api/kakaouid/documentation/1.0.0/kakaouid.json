@@ -540,6 +540,9 @@
           "isMembership": {
             "type": "boolean",
             "default": false
+          },
+          "isApply": {
+            "type": "boolean"
           }
         }
       },
@@ -563,6 +566,9 @@
           "isMembership": {
             "type": "boolean",
             "default": false
+          },
+          "isApply": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"

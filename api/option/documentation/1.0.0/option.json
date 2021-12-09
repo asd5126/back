@@ -338,6 +338,9 @@
           },
           "coinmarketcapKrwId": {
             "type": "integer"
+          },
+          "isPointOnlyWallet": {
+            "type": "boolean"
           }
         }
       },
@@ -363,6 +366,9 @@
           },
           "coinmarketcapKrwId": {
             "type": "integer"
+          },
+          "isPointOnlyWallet": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"

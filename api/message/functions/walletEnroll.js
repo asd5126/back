@@ -32,5 +32,5 @@ module.exports = async (trx, body) => {
     });
   }
 
-  return { result: "SUCCESS", message: "[지갑등록완료!😀]\n등록된 지갑 주소 : " + walletKey };
+  return { result: "SUCCESS", message: "[지갑등록완료!😀]\n등록된 지갑 주소 : " + walletKey.substr(0, 7) };
 };
