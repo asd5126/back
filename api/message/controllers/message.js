@@ -6,6 +6,7 @@ const getCoin = require("../functions/getCoin");
 const getCommand = require("../functions/getCommand");
 const getDomi = require("../functions/getDomi");
 const getMyPoint = require("../functions/getMyPoint");
+const getPointRank = require("../functions/getPointRank");
 const kakaoMsg = require("../functions/kakaoMsg");
 const setApply = require("../functions/setApply");
 const setPeoplePoint = require("../functions/setPeoplePoint");
@@ -43,6 +44,9 @@ module.exports = {
               break;
             case "포인트조회":
               resultObject = await getMyPoint(trx, body);
+              break;
+            case "포인트순위조회":
+              resultObject = await getPointRank(trx, body);
               break;
             case "방장조회":
               resultObject = await getBoss(trx, body);

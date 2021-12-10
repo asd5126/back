@@ -18,6 +18,19 @@ module.exports = {
       room = :room AND
       sender = :sender
   `,
+  selectKakaouidsPointRank: `/* SQL */
+    SELECT 
+      room, 
+      sender,
+      point
+    FROM 
+      kakaouids
+    WHERE
+      room = :room
+    ORDER BY
+      point DESC
+    LIMIT 0, 10
+  `,
   insertKakaouids: `/* SQL */
     INSERT INTO kakaouids (
       room,

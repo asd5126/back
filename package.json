@@ -12,6 +12,7 @@
   "devDependencies": {},
   "dependencies": {
     "axios": "^0.24.0",
+    "jsdom": "^19.0.0",
     "knex": "0.21.18",
     "mysql": "2.18.1",
     "numeral": "^2.0.6",

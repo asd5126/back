@@ -32,5 +32,5 @@ module.exports = async (trx, body) => {
     });
   }
 
-  return { result: "SUCCESS", message: "[지갑등록완료!😀]\n등록된 지갑 주소 : " + walletKey.substr(0, 7) };
+  return { result: "SUCCESS", message: `[${body.sender}님의 지갑등록완료!😀]\n등록된 지갑 주소 (앞 7자리) : ${walletKey.substr(0, 7)}` };
 };

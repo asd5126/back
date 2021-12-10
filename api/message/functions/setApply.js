@@ -1,7 +1,4 @@
-const numeral = require("numeral");
-const { selectKakaouids } = require("../../../sql/kakaouids");
-const { selectOptions } = require("../../../sql/options");
-const setPoint = require("./setPoint");
+const { selectKakaouids, updateKakaouidsApply } = require("../../../sql/kakaouids");
 
 module.exports = async (trx, body) => {
   const command = body.message.substr(1, body.message.length).split(" ")[0];
@@ -17,38 +14,29 @@ module.exports = async (trx, body) => {
 
   const kakaouids = getKakaouids[0][0];
 
-  console.log(kakaouids.isApply);
-
-  return { result: "SUCCESS", message: kakaouids.isApply };
-
   if (command === "신청합니다.") {
+    if (kakaouids.isApply) {
+      throw Error(`ERROR|${kakaouids.sender}님은 이미 신청하셨습니다.`);
+    } else {
+      await trx.raw(updateKakaouidsApply, {
+        room: body.room,
+        sender: body.sender,
+        imageProfileBase64: body.imageProfileBase64,
+        isApply: true,
+      });
+      return { result: "SUCCESS", message: `[${kakaouids.sender}님 신청완료😀]` };
+    }
   } else if (command === "신청취소합니다.") {
+    if (kakaouids.isApply) {
+      await trx.raw(updateKakaouidsApply, {
+        room: body.room,
+        sender: body.sender,
+        imageProfileBase64: body.imageProfileBase64,
+        isApply: false,
+      });
+      return { result: "SUCCESS", message: `[${kakaouids.sender}님 취소완료😀]` };
+    } else {
+      throw Error(`ERROR|${kakaouids.sender}님은 이미 취소되었습니다.`);
+    }
   }
-
-  // // Option 가져오기
-  // const getOptions = await trx.raw(selectOptions);
-  // const option = getOptions[0][0];
-  // const kakaouids = getKakaouids[0][0];
-  // const isPoint = option.selectPointCost <= kakaouids.point;
-
-  // await setPoint(trx, {
-  //   kakaouid: kakaouids.id,
-  //   room: body.room,
-  //   sender: body.sender,
-  //   message: "[포인트조회]",
-  //   point: -option.selectPointCost,
-  //   isPoint,
-  // });
-
-  // if (!isPoint) {
-  //   throw Error("NO_REPLY|포인트가 부족합니다😂");
-  // }
-
-  // const step5 = await trx.raw(selectKakaouids, {
-  //   room: body.room,
-  //   sender: body.sender,
-  //   imageProfileBase64: body.imageProfileBase64,
-  // });
-
-  // return { result: "SUCCESS", message: `[${step5[0][0].sender}님의 포인트 : ${numeral(step5[0][0].point).format("0,0.000")}]` };
 };

@@ -36,6 +36,13 @@ module.exports = async (trx, body) => {
   const timeCheckQuery = await trx.raw(selectTimeCheckQuery, { kakaouid });
   if (timeCheckQuery[0].length > 0 && option.pointDelaySecond - timeCheckQuery[0][0].timeDiff > 0) isPoint = false;
 
+  // 지갑 등록된 유저만 포인트 쌓이는 옵션
+  if (option.isPointOnlyWallet) {
+    if (getKakaouids[0].length === 0 || !getKakaouids[0][0].walletKey) {
+      isPoint = false;
+    }
+  }
+
   await setPoint(trx, {
     kakaouid,
     room: body.room,
