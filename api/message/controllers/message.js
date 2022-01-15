@@ -8,6 +8,7 @@ const getDomi = require("../functions/getDomi");
 const getMyPoint = require("../functions/getMyPoint");
 const getPointRank = require("../functions/getPointRank");
 const kakaoMsg = require("../functions/kakaoMsg");
+const sendMyPoint = require("../functions/sendMyPoint");
 const setApply = require("../functions/setApply");
 const setPeoplePoint = require("../functions/setPeoplePoint");
 const walletCancel = require("../functions/walletCancel");
@@ -41,6 +42,9 @@ module.exports = {
               break;
             case "강제지갑해제":
               resultObject = await walletCancelForce(trx, body);
+              break;
+            case "포인트전송":
+              resultObject = await sendMyPoint(trx, body);
               break;
             case "포인트조회":
               resultObject = await getMyPoint(trx, body);
